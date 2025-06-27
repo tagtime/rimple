@@ -6,5 +6,8 @@ See
 [messymatters.com/tagtime](http://messymatters.com/tagtime )
 for the whole story.
 
-We're currently auto-tweeting git commits: [@tagtm](http://twitter.com/tagtm ).
+This is the reference implementation of the universal ping schedule.
 
+It's hosted at https://tagtime.github.io/rimple
+
+This is just for developers implementing the TagTime algorithm to make sure they're on the same schedule.
