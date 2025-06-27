@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html>
+<head>
+</head>
+<body>
+  
+<p>
+<h1>TagTime Reference Implementation</h1>
+</p>
+
+<hr>
+
+<pre>
+Most recent ping: 
+<span id="lastping"></span>
+<span id="lastping2"></span>
+URPING = <span id="urping"></span>
+SEED   = <span id="seed"></span>
+</pre>
+
+<hr>
+
+<pre>
+Testing the reference implementation:
+
+Perl:       1533748817 &rarr; 1533754341 &rarr; 1533758980 &rarr; 1533759940
+Javascript: <span id="alg1"></span>
+</pre>
+
+<hr>
+
+<p>
+Here's a test of playing a sound:
+<!-- <audio id="audiotag1" src="http://www.storiesinflight.com/html5/audio/flute_c_long_01.wav" preload="auto"></audio> -->
+<!-- <audio id="audiotag1" src="https://www.soundjay.com/button/beep-07.wav" preload="auto"></audio> -->
+<audio id="audiotag1" src="sound/whoosh.wav" preload="auto"></audio>
+<a href="javascript:play_single_sound();">Play</a>
+<script type="text/javascript">
+	function play_single_sound() {
+		document.getElementById('audiotag1').play()
+	}
+</script>
+</p>
+
+<hr>
+
+<pre>
+Testing the reference implementation of the possible new algorithm:
+
+From Scratch:      <span id="alg2"></span>
+With Fast-forward: <span id="ffwd"></span>
+</pre>
+
+<hr>
+
+<pre>
+Sanity-checking fast-forwarding of the random number generator:
+
+One: <span id="sane1"></span>
+Two: <span id="sane2"></span>
+</pre>
+
+<script src="/client.js"></script>
+<script src="/client2.js"></script>
+
+
+<script>
+let p = init(Date.now()/1000)
+let d = new Date(p*1000)
+document.getElementById('lastping').innerHTML = 
+  d.toLocaleString('si-LK', { timeZoneName:"long" })
+document.getElementById('urping').innerHTML = pung
+document.getElementById('seed').innerHTML = state
+
+let p1, p2, p3, p4
+p1 = 1533748817
+p1 = init(p1)
+p2 = nextping()
+p3 = nextping()
+p4 = nextping()
+document.getElementById('alg1').innerHTML = 
+  `${p1} &rarr; ${p2} &rarr; ${p3} &rarr; ${p4}`
+reset()
+p1 = nextping2(URPING2)
+p2 = nextping2(p1)
+p3 = nextping2(p2)
+p4 = nextping2(p3)
+document.getElementById('alg2').innerHTML = 
+  `${URPING2} &rarr; ${p1} &rarr; ${p2} &rarr; ${p3} &rarr; ${p4}`
+reset()
+p1 = nextping2(URPING2)
+reset()
+p2 = nextping2(p1)
+reset()
+p3 = nextping2(p2)
+reset()
+p4 = nextping2(p3)
+document.getElementById('ffwd').innerHTML = 
+  `${URPING2} &rarr; ${p1} &rarr; ${p2} &rarr; ${p3} &rarr; ${p4}`
+reset()
+p1 = lcg2()
+p2 = lcg2()
+p3 = lcg2()
+p4 = lcg2()
+document.getElementById('sane1').innerHTML = 
+  `${URPING2} &rarr; ${p1} &rarr; ${p2} &rarr; ${p3} &rarr; ${p4}`
+
+reset()
+p1 = powlcg(1)
+reset()
+p2 = powlcg(2)
+reset()
+p3 = powlcg(3)
+reset()
+p4 = powlcg(4)
+document.getElementById('sane2').innerHTML = 
+  `${URPING2} &rarr; ${p1} &rarr; ${p2} &rarr; ${p3} &rarr; ${p4}`
+
+//p1 = 1533748817
+//p2 = firstpingafter(p1)
+//p3 = nextping()
+//document.getElementById('refactor') .innerHTML = p1 + ' &rarr; ' + p2 + ' &rarr; ' + p3
+
+</script>
+
+</body>
+</html>
