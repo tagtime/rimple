@@ -11,3 +11,9 @@ This is the reference implementation of the universal ping schedule.
 It's hosted at https://tagtime.github.io/rimple
 
 This is just for developers implementing the TagTime algorithm to make sure they're on the same schedule.
+
+## Changelog
+
+```
+2025-06-26 Moved from Glitch
+```
